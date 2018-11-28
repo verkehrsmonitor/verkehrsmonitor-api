@@ -1,0 +1,44 @@
+{
+  "name": "traffic-api",
+  "version": "0.0.1",
+  "description": "API for traffic analysis",
+  "main": "index.js",
+  "scripts": {
+    "start": "pm2 startOrRestart ecosystem.json --env production",
+    "dev": "pm2 start ecosystem.json --watch",
+    "postdev": "npm run logs",
+    "logs": "pm2 logs $npm_package_name",
+    "stop": "pm2 stop $npm_package_name",
+    "deploy": "pm2 deploy production",
+    "deploy:init": "pm2 deploy production setup",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wbkd/traffic-api.git"
+  },
+  "keywords": [
+    "API",
+    "traffic"
+  ],
+  "author": "g-div",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wbkd/traffic-api/issues"
+  },
+  "homepage": "https://github.com/wbkd/traffic-api#readme",
+  "dependencies": {
+    "blipp": "^3.0.0",
+    "boom": "^7.1.1",
+    "fast-csv": "^2.4.1",
+    "glue": "^5.0.0",
+    "hapi": "^17.2.0",
+    "hapi-mongodb": "^7.1.0",
+    "inert": "^5.1.0",
+    "joi": "^13.1.2",
+    "lout": "^11.0.1",
+    "pm2": "^2.9.3",
+    "rejoice": "^4.0.0",
+    "vision": "^5.3.2"
+  }
+}

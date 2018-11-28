@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name"      : "traffic-api",
+      "script"    : "index.js",
+      "env_production" : {
+        "NODE_ENV": "production"
+      },
+      "ignore_watch": ["node_modules/", "data/", ".git/"]
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "web",
+      "host": "139.59.132.226",
+      "ref": "origin/master",
+      "repo": "git@github.com:wbkd/traffic-api.git",
+      "path": "/home/web/traffic-api",
+      "post-deploy": "./bin/post-deploy.sh"
+    }
+  }
+}

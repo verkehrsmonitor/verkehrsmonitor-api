@@ -1,0 +1,183 @@
+{
+    "server": {
+        "port": 8000,
+        "router": {
+            "stripTrailingSlash": true
+        },
+        "routes": {
+            "cors": {
+                "origin": ["*"],
+                "additionalHeaders": ["X-Timerange"],
+                "additionalExposedHeaders": ["X-Timerange"]
+            }
+        }
+    },
+    "register": {
+        "plugins": [
+            "blipp",
+            "vision",
+            "inert",
+            "lout",
+            {
+                "plugin": "hapi-mongodb",
+                "options": [{
+                    "decorate": "v1",
+                    "url": "mongodb://localhost:27017/traffic"
+                }, {
+                    "decorate": "v2",
+                    "url": "mongodb://localhost:27017/measurements"
+                }]
+            },
+            {
+                "plugin": "./query.js",
+                "options": {
+                    "name": "query"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/stations",
+                    "db": "v1",
+                    "collection": "stations"
+                },
+                "routes": {
+                    "prefix": "/api"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/stations",
+                    "db": "v2",
+                    "collection": "stations"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/data",
+                    "db": "v1",
+                    "collection": "measures"
+                },
+                "routes": {
+                    "prefix": "/api"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/data",
+                    "db": "v2",
+                    "collection": "measures"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/data/by_day",
+                    "db": "v2",
+                    "collection": "by_day"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/data/by_month",
+                    "db": "v2",
+                    "collection": "by_month"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/data/by_year",
+                    "db": "v2",
+                    "collection": "by_year"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/data/avg/by_month",
+                    "db": "v2",
+                    "collection": "avg_by_month"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/data/avg/hourly",
+                    "db": "v2",
+                    "collection": "hourly_avg_pro_year"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/data/by_day",
+                    "db": "v1",
+                    "collection": "by_day"
+                },
+                "routes": {
+                    "prefix": "/api"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/range",
+                    "db": "v2",
+                    "collection": "auto"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            },
+            {
+                "plugin": "./api.js",
+                "options": {
+                    "method": "GET",
+                    "path": "/near",
+                    "db": "v2",
+                    "collection": "geolocations"
+                },
+                "routes": {
+                    "prefix": "/api/v2"
+                }
+            }
+        ]
+    }
+}
